@@ -1,3 +1,8 @@
+/*
+ * AppController.h
+ *
+ */
+
 #import <Cocoa/Cocoa.h>
 
 @interface AppController : NSObject {
@@ -5,7 +10,7 @@
 	NSString *system;
 	NSString *subsystem;
 	NSString *code;
-	
+
 	NSDictionary	*systemLookup;
 	NSDictionary	*subsystemLookup;
 	NSDictionary	*codeLookup;

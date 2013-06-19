@@ -1,3 +1,8 @@
+/*
+ * AppController.m
+ *
+ */
+
 #import "AppController.h"
 #include <stdlib.h>
 #import <IOKit/IOReturn.h>
@@ -29,7 +34,7 @@
 		system = [[NSString alloc] init];
 		subsystem = [[NSString alloc] init];
 		code = [[NSString alloc] init];
-		
+
 		systemLookup = [[NSDictionary alloc] initWithObjectsAndKeys:
 			MAKE_OBJECT_AND_SYSTEM_KEY(err_kern),		//	0  0x0
 			MAKE_OBJECT_AND_SYSTEM_KEY(err_us),			//	1  0x1
@@ -42,7 +47,7 @@
 			MAKE_OBJECT_AND_SYSTEM_KEY(err_local),		//	62 0x3e
 			MAKE_OBJECT_AND_SYSTEM_KEY(err_ipc_compat),	//	63 0x3f
 			nil];
-		
+
 		subsystemLookup = [[NSDictionary alloc] initWithObjectsAndKeys:
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_common),	  		//	0
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_usb),		  		//	1
@@ -51,20 +56,20 @@
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_block_storage),		//	4
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_graphics),	 		//	5
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_networking), 		//	6
-			
+
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_bluetooth),			//	8
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_pmu),	   			//	9
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_acpi),	   			//	10
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_smbus),	   			//	11
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_ahci),	   			//	12
-			
+
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_hidsystem),			//	14
-			
+
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_pccard),			//	21
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_vendor_specific),	//	-2
 			MAKE_OBJECT_AND_SUBSYSTEM_KEY(sub_iokit_reserved),			//	-1
 			nil];
-			
+
 	}
 	return self;
 }
@@ -73,22 +78,22 @@
 	if (mach_errorString != mach_errorString_) {
 		[mach_errorString release];
 		mach_errorString = [mach_errorString_ retain];
-		
+
 		//--
-		
+
 		if (mach_errorString) {
 			mach_error_t err = strtol([mach_errorString UTF8String], NULL, 0);
-			
+
 			int systemCode = err_get_system(err);
 			NSString *systemName = [systemLookup objectForKey:[NSNumber numberWithInt:systemCode]];
 			[self setValue:[NSString stringWithFormat:@"%03d 0x%02x %@", systemCode, systemCode, systemName ? systemName : @"unknown system"]
 					forKey:@"system"];
-			
+
 			int subsystemCode = err_get_sub(err);
 			NSString *subsystemName = [subsystemLookup objectForKey:[NSNumber numberWithInt:subsystemCode]];
 			[self setValue:[NSString stringWithFormat:@"%03d 0x%02x %@", subsystemCode, subsystemCode, subsystemName ? subsystemName : @"unknown subsystem"]
 					forKey:@"subsystem"];
-			
+
 			int codeCode = err_get_code(err);
 			[self setValue:[NSString stringWithFormat:@"%03d 0x%02x", codeCode, codeCode]
 					forKey:@"code"];
@@ -97,7 +102,7 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification_ {
-	// Do me.
+	// Do me. (?)
 }
 
 @end

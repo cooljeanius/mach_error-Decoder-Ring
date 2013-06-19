@@ -1,7 +1,10 @@
-//
-// Prefix header for all source files of the 'mach_error Decoder Ring' target in the 'mach_error Decoder Ring' project
-//
+/*
+ * Prefix header for all source files of the 'mach_error Decoder Ring' target in
+ * the 'mach_error Decoder Ring' project
+ */
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+#else
+	#include <stdio.h>
 #endif
