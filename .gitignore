@@ -3,3 +3,6 @@
 *.perspectivev3
 build/*
 *.log
+*.xcuserstate
+*.xcuserdatad
+*/xcuserdata/*
